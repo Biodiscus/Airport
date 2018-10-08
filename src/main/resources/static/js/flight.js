@@ -49,11 +49,7 @@ function initMap() {
                 markers = shiftMarkers(markers);
             }
 
-
-
             updateInfo();
-
-            console.log("Markers:", markers);
         });
 
 
@@ -65,12 +61,13 @@ function initMap() {
     // Secondly, update the text fields with the correct airport names
     function updateInfo() {
         markers[0].setIcon(FIRST_ICON);
+        $(".airport .first").html(markers[0].name);
+
         if (markers.length > 1) {
             markers[1].setIcon(SECOND_ICON);
+            $(".airport .second").html(markers[1].name);
+            var distance = PosUtil.getDistance(markers[0].getPosition(), markers[1].getPosition());
+            $(".airport .distance").html(distance + "km");
         }
-
-        $(".airport .first").html(markers[0].name);
-        $(".airport .second").html(markers[1].name);
-
     }
 }
