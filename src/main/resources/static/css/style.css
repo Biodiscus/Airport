@@ -1,3 +1,7 @@
-.map {
+#item-modal .map {
     height: 300px;
+}
+
+#flights .map {
+    height: 500px;
 }

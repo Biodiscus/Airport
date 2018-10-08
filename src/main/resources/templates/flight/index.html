@@ -1,0 +1,76 @@
+{{> template/header}}
+
+<div class="container" id="flights">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Flight</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row airport">
+                <div class="col-md-6"><strong>Start point:</strong> <span class="first"></span></div>
+                <div class="col-md-6"><strong>End point:</strong> <span class="second"></span></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="item-modal" tabindex="-1" role="dialog" aria-labelledby="item-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Brand</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="add-skill" onsubmit="return false">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control name" type="text" name="name" placeholder="Enter a name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Brand</label>
+                        <select class="form-control brand"></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary save">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Are you sure you want to remove brand <span id="name"></span>?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-danger delete">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/flight.js"></script>
+<script src="/js/util/PosUtil.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYJzWtotlBNSg7mwCQMnd5nPOd5592v9E&callback=initMap" async defer></script>
+
+{{> template/footer}}
