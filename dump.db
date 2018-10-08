@@ -1,0 +1,18 @@
+INSERT INTO `airport`.`brand` (`name`) VALUES ('Airbus');
+INSERT INTO `airport`.`brand` (`name`) VALUES ('Boeing Business Jet');
+INSERT INTO `airport`.`brand` (`name`) VALUES ('Bombardier Aerospace');
+INSERT INTO `airport`.`brand` (`name`) VALUES ('Cessna');
+
+INSERT INTO `airport`.`type` (`name`, `brand_id`) VALUES ('A220', '1');
+INSERT INTO `airport`.`type` (`name`, `brand_id`) VALUES ('A320', '1');
+INSERT INTO `airport`.`type` (`name`, `brand_id`) VALUES ('737', '2');
+INSERT INTO `airport`.`type` (`name`, `brand_id`) VALUES ('747', '2');
+INSERT INTO `airport`.`type` (`name`, `brand_id`) VALUES ('Learjet 40', '3');
+INSERT INTO `airport`.`type` (`name`, `brand_id`) VALUES ('Learjet 45', '3');
+INSERT INTO `airport`.`type` (`name`, `brand_id`) VALUES ('Hemisphere', '4');
+INSERT INTO `airport`.`type` (`name`, `brand_id`) VALUES ('Longitude', '4');
+
+INSERT INTO `airport`.`airplane` (`fuel`, `name`, `type_id`) VALUES ('200000', '', '1');
+INSERT INTO `airport`.`airplane` (`fuel`, `type_id`) VALUES ('300000', '3');
+INSERT INTO `airport`.`airplane` (`fuel`, `type_id`) VALUES ('400000', '4');
+INSERT INTO `airport`.`airplane` (`fuel`, `type_id`) VALUES ('500000', '5');
