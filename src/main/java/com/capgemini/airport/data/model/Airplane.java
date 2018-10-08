@@ -41,6 +41,10 @@ public class Airplane {
 
     @Transient
     public String getName() {
-        return this.type.getBrand().getName() + " " + this.type.getName();
+        if (this.type != null && this.type.getBrand() != null) {
+            return this.type.getBrand().getName() + " " + this.type.getName();
+        } else {
+            return "No type specified";
+        }
     }
 }

@@ -44,7 +44,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Unit</h5>
+                <h5 class="modal-title">Airplane</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -52,8 +52,13 @@
             <form id="add-skill" onsubmit="return false">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Name</label>
-                        <input class="form-control name" type="text" name="name" placeholder="Enter a name">
+                        <label>Fuel</label>
+                        <input class="form-control fuel" type="number" name="name" placeholder="Enter an amount">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select class="form-control type"></select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -69,7 +74,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Are you sure you want to remove item <span id="name"></span>?</h5>
+                <h5 class="modal-title">Are you sure you want to remove airplane <span id="name"></span>?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

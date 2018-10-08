@@ -33,7 +33,13 @@ public class AirplaneService {
     public Airplane update(Airplane airplane) {
         Airplane old = read(airplane.getId());
 
-        // TODO: Update the values
+        if (!old.getType().equals(airplane.getType())) {
+            old.setType(airplane.getType());
+        }
+
+        if (!old.getFuel().equals(airplane.getFuel())) {
+            old.setFuel(airplane.getFuel());
+        }
 
         return repository.save(old);
     }

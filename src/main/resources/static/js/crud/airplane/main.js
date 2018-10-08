@@ -1,6 +1,7 @@
 // The main file is meant to construct the dataTable and provide a global variable for other javascript files to use
 var DATA_TABLE;
 var BASE_URL = "/api/airplane/";
+var TYPE_URL = "/api/type/";
 var DATA_PAIRS = {
     id: ".id",
     name: ".name",

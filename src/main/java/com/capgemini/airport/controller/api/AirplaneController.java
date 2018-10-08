@@ -2,6 +2,7 @@ package com.capgemini.airport.controller.api;
 
 import com.capgemini.airport.data.model.Airplane;
 import com.capgemini.airport.data.service.AirplaneService;
+import com.capgemini.airport.data.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 public class AirplaneController {
     @Autowired
     private AirplaneService airplaneService;
+
+    @Autowired
+    private TypeService typeService;
 
     @GetMapping("/")
     public Iterable<Airplane> getAll() {
@@ -23,16 +27,31 @@ public class AirplaneController {
 
     @PostMapping("/")
     public Airplane create(@RequestBody Airplane airplane) {
-        return airplaneService.create(airplane);
+        airplane = airplaneService.create(airplane);
+
+        if (airplane.getType() != null) {
+            long id = airplane.getType().getId();
+            airplane.setType(typeService.read(id));
+        }
+
+        return airplane;
     }
 
     @PutMapping("/")
     public Airplane update(@RequestBody Airplane airplane) {
-        return airplaneService.update(airplane);
+        airplane = airplaneService.update(airplane);
+
+        if (airplane.getType() != null) {
+            long id = airplane.getType().getId();
+            airplane.setType(typeService.read(id));
+        }
+
+        return airplane;
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") long id) {
+        airplaneService.delete(id);
         return "{'success': true}";
     }
 }

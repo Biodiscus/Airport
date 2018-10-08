@@ -15,14 +15,17 @@ $(function() {
         // Set the form into a editable state, this allows us to wait for a click on button.edit.
         FormUtil.makeFormEdit(form);
         FormUtil.fillForm(DATA_PAIRS, data, form);
+        form.find(".type").val(data.type.id);
 
 
         form.find("button.edit").click(function() {
             var model = FormUtil.formToValues(DATA_PAIRS, form);
+            model.type = {id: form.find(".type").val()};
             // We don't keep a reference of the id on the form, so use the original data to set the correct id.
             model.id = data.id;
+            delete model.name;
 
-            URLUtil.put(BASE_URL+model.id, model).then(function(obj) {
+            URLUtil.put(BASE_URL, model).then(function(obj) {
                 DATA_TABLE.row(tr).data(obj).invalidate();
                 modal.modal("toggle");
             });
