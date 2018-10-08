@@ -1,44 +1,48 @@
 // The init method called by google maps
+var GOOGLE_MARKER = null;
+var GOOGLE_MAPS = null;
+
 function initMap() {
-    var marker = null;
     var ele = $(".map")[0];
 
     // The lat and lon of Capgemini Utrecht
-    var map = new google.maps.Map(ele, {
+    GOOGLE_MAPS = new google.maps.Map(ele, {
         center: {lat: 52.099840, lng: 5.064970},
         zoom: 10
     });
 
-
     // Copied from: http://thisinterestsme.com/google-maps-api-location-picker-example/
-    map.addListener("click", function(e) {
+    GOOGLE_MAPS.addListener("click", function(e) {
         //Get the location that the user clicked.
         var clickedLocation = e.latLng;
-        //If the marker hasn't been added.
-        if(marker === null){
-            //Create the marker.
-            marker = new google.maps.Marker({
-                position: clickedLocation,
-                map: map,
-                draggable: true //make it draggable
-            });
+        //If the GOOGLE_MARKER hasn't been added.
+        if(GOOGLE_MARKER === null){
+            //Create the GOOGLE_MARKER.
+            GOOGLE_MARKER = createMarker(clickedLocation);
             //Listen for drag events!
-            marker.addListener('dragend', function(event){
+            GOOGLE_MARKER.addListener('dragend', function(event){
                 markerLocation();
             });
         } else {
             //Marker has already been added, so just change its location.
-            marker.setPosition(clickedLocation);
+            GOOGLE_MARKER.setPosition(clickedLocation);
         }
-        //Get the marker's location.
+        //Get the GOOGLE_MARKER's location.
         markerLocation();
     });
-
     // Update the position
     function markerLocation() {
-        var pos = marker.getPosition();
+        var pos = GOOGLE_MARKER.getPosition();
 
         $(".lat").val(pos.lat());
         $(".lon").val(pos.lng());
     }
+}
+
+function createMarker(pos) {
+    return new google.maps.Marker({
+        position: pos,
+        map: GOOGLE_MAPS,
+        draggable: true //make it draggable
+    });
 }

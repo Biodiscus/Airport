@@ -2,6 +2,13 @@ $(function() {
     var modal = $("#item-modal");
     var form = modal.find("form");
 
+    // Delete the google maps marker if it's persent
+    if (GOOGLE_MARKER !== null) {
+        GOOGLE_MAPS.setMap(null);
+        GOOGLE_MAPS = NULL;
+    }
+
+
     // We can't use the default click function, because the data is loaded in dynamically.
     // The following line lets jQuery listen on all clicks on the body and only filter out those whose
     // selector matches the one that was clicked on. This allows us to get click events on dynamic content.

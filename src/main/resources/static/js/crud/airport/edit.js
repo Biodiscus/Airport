@@ -10,20 +10,32 @@ $(function() {
         var tr = $(this).parent().parent();
         var data = DATA_TABLE.row(tr).data();
 
+        // Set the lat and lon of a maps marker
+
+        var pos = {
+            lat: data.latitude,
+            lng: data.longitude
+        };
+        if (GOOGLE_MARKER === null) {
+            // Create a new marker at the given position
+            GOOGLE_MARKER = createMarker(pos);
+        } else {
+            GOOGLE_MARKER.setPosition(pos);
+        }
+        // And make it the center of the map
+        GOOGLE_MAPS.setCenter(pos);
+
         modal.modal("toggle");
 
         // Set the form into a editable state, this allows us to wait for a click on button.edit.
         FormUtil.makeFormEdit(form);
         FormUtil.fillForm(DATA_PAIRS, data, form);
-        form.find(".type").val(data.type.id);
 
 
         form.find("button.edit").click(function() {
             var model = FormUtil.formToValues(DATA_PAIRS, form);
-            model.type = {id: form.find(".type").val()};
             // We don't keep a reference of the id on the form, so use the original data to set the correct id.
             model.id = data.id;
-            delete model.name;
 
             URLUtil.put(BASE_URL, model).then(function(obj) {
                 DATA_TABLE.row(tr).data(obj).invalidate();
