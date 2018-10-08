@@ -19,3 +19,10 @@ PosUtil.getDistance = function(pos1, pos2) {
 PosUtil.toRadians = function(val) {
     return val * (Math.PI / 180);
 };
+
+PosUtil.convertLatLng = function(pos) {
+    return {
+        latitude: pos.lat(),
+        longitude: pos.lng()
+    }
+};

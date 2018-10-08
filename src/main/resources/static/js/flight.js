@@ -16,7 +16,7 @@ function initMap() {
     URLUtil.get("/api/airport/").then(function(arr) {
         $.each(arr, function(i, obj) {
             var pos = {lat: obj.latitude, lng: obj.longitude};
-            createMarker(pos, obj.name, maps);
+            createMarker(pos, obj, maps);
         });
     });
 
@@ -30,12 +30,12 @@ function initMap() {
     }
 
     // Create a new marker at the given position and add it to the markers array
-    function createMarker(pos, name, map) {
+    function createMarker(pos, obj, map) {
         var marker = new google.maps.Marker({
             position: pos,
             map: map,
             icon: DEFAULT_ICON,
-            name: name
+            data: obj
         });
 
         // When the user clicks a marker, check if this is the first marker
@@ -61,13 +61,30 @@ function initMap() {
     // Secondly, update the text fields with the correct airport names
     function updateInfo() {
         markers[0].setIcon(FIRST_ICON);
-        $(".airport .first").html(markers[0].name);
+        $(".airport .first").html(markers[0].data.name);
 
         if (markers.length > 1) {
             markers[1].setIcon(SECOND_ICON);
-            $(".airport .second").html(markers[1].name);
+            $(".airport .second").html(markers[1].data.name);
             var distance = PosUtil.getDistance(markers[0].getPosition(), markers[1].getPosition());
             $(".airport .distance").html(distance + "km");
         }
     }
+
+
+    $(".book").click(function(e) {
+        if(markers.length < 2) {
+            $("#status-modal").modal("toggle");
+        }
+
+        var flight = {
+            when: "now?",
+            start: PosUtil.convertLatLng(markers[0].getPosition()),
+            end: PosUtil.convertLatLng(markers[1].getPosition())
+        };
+
+        URLUtil.post("/api/flight/", flight).then(function() {
+
+        });
+    });
 }
